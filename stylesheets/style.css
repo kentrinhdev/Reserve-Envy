@@ -1,0 +1,186 @@
+*, html,body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
+}
+
+/* html {
+    background: url(/images/env.jpg) no-repeat center top fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+} */
+
+#main-frame {
+    width: 55.5vw;
+    min-width: 1350px;
+    text-align: center;
+}
+
+.table-head {
+    padding-bottom: 10px;
+    margin-bottom: -50px;
+}
+
+.line-img {
+    width: 1350px;
+    height: 15px;
+    margin-bottom: -20px;
+}
+
+.cell, .child-cell, .child-cell-output {
+    font-size: 1.5rem;
+    display: inline-block;
+
+    margin-left: -2px;
+    margin-right: -2px;
+}
+
+.numbering {
+    width: 70px;
+}
+
+.num-label, .env-label, .us-label {
+    font-size: 1.3rem;
+}
+
+.status {
+    width: 170px;
+}
+
+.select {
+    font-size: 1.2rem;
+    border: none;
+}
+
+.status-select {
+    width: 150px;
+}
+
+.dev-select, .qa-select {
+    width: 140px;
+}
+
+.label-text-grey {
+    color: lightgrey;
+}
+
+.environment, .userstory, .developer, .qa {
+    width: 200px;
+}
+
+.us-number {
+    width: 120px;
+    font-size: 1.3rem;
+    border: none;
+    border-bottom: 1px solid lightblue;
+}
+
+.reservation-form, .reservation-fieldset {
+    border: none;
+}
+
+.box-btn-update {
+    margin-top: 25px;
+    padding-left: 45vw;
+}
+
+.btn-refresh {
+    top: 615px;
+    left: 1040px;
+    width: 150px;
+    font-size: 16px;
+    padding: 16px 30px;
+    color: black;
+    text-align: center;
+    background-color: lightblue;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    position: fixed;
+}
+
+.btn {
+    top: 280px;
+    left: 1040px;
+    width: 150px;
+    font-size: 16px;
+    padding: 16px 30px;
+    color: black;
+    text-align: center;
+    background-color: lightblue;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    position: fixed;
+}
+
+.btn:hover, .btn-output:hover, .btn-refresh:hover {
+    background-color: black;
+    color: white;
+  }
+
+.line-img-output {
+    width: 1350px;
+    height: 15px;
+    margin-bottom: -30px;
+}
+
+.main-frame-output {
+    margin-top: 20px;
+    padding-top: 10px;
+}
+
+.child-cell-output {
+    background-color: whitesmoke;
+    border: 1px solid skyblue;
+}
+
+.break {
+    display: block;
+}
+
+.btn-output {
+    width: 90px;
+    height: 30px;
+    font-size: 16px;
+    margin-top: -25px;
+    margin-left: 10px;
+    color: black;
+    text-align: center;
+    background-color: lightblue;
+    cursor: pointer;
+    border-radius: 3px;
+    border: none;
+    position: fixed;
+}
+
+.line-img-output-log {
+    margin-top: 85px;
+}
+
+.title-log {
+    font-size: 1.4rem;
+    color: lightskyblue;
+    text-align: left;
+    margin-top: 30px;
+    padding-left: 150px;
+}
+
+.log-output-box {
+    width: 55.5vw;
+    min-width: 1150px;
+    height: 165px;
+    color: lawngreen;
+    background: black !important;
+    margin-left: 150px;
+    margin-top: 15px;
+    padding-left: 25px;
+    padding-top: 15px;
+    padding-bottom: 10px;
+    border-radius: 5px;
+}
+
+.log-output {
+    background: black;
+}
