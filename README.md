@@ -1,2 +1,2 @@
 # Reserve-Envy
-A reservation tool for developers.
+A release-to-test environment reservation tool for developers.
