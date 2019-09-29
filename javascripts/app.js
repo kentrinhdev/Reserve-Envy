@@ -1,5 +1,19 @@
 "use strict";
 
+function setFocus() {
+    $('#us-number-textbox-test1').focus();
+}
+
+function clearReserveGrid() {
+    let numberOfRows = 4;
+    for (let r = 1; r <= numberOfRows; r++) {
+        $(`#status-dropbox-test${r}`).prop('selectedIndex', 0);
+        $(`#us-number-textbox-test${r}`).val('');
+        $(`#dev-dropbox-test${r}`).prop('selectedIndex', 0);
+        $(`#qa-dropbox-test${r}`).prop('selectedIndex', 0);
+    }
+}
+
 function handleStatusGreenColorIndication(rownum) {
     $(`.r${rownum}-numbering`).css("background-color", "green").css("color", "white");
     $(`.r${rownum}-status`).css("background-color", "green").css("color", "white");
@@ -18,147 +32,86 @@ function handleStatusRedColorIndication(rownum) {
     $(`.r${rownum}-qa`).css("background-color", "red").css("color", "white");
 }
 
-function confirmDataRead(rownum, rowstatus, rowuserstory, rowdev, rowqa) {
-    if (rowstatus.length && rowstatus == "UNAVAILABLE") {
-        $(`#r${rownum}st-f`).html(`${rowstatus}`);
-        $(`#r${rownum}us-f`).html(`${rowuserstory}`);
-        $(`#r${rownum}dv-f`).html(`${rowdev}`);
-        $(`#r${rownum}qa-f`).html(`${rowqa}`);
-
+function handleStatusColor(rownum, rowstatus) {
+    if (rowstatus == "UNAVAILABLE") {
         handleStatusRedColorIndication(rownum);
     }
-    else if (rowstatus.length && rowstatus == "AVAILABLE") {
-        $(`#r${rownum}st-f`).html(`${rowstatus}`);
-        $(`#r${rownum}us-f`).html(``);
-        $(`#r${rownum}dv-f`).html(``);
-        $(`#r${rownum}qa-f`).html(``);
-
+    if (rowstatus == "AVAILABLE") {
         handleStatusGreenColorIndication(rownum);
     }
 }
 
-function readData() {
-    var url = "BOMB.json";
-
+function loadUnreserveGrid() {
+    let r = 0;
+    var url = "env.json";
     $.getJSON(url, function(json) {
-        let r1st = json[0].r1status;
-        let r1us = json[0].r1userstory;
-        let r1dv = json[0].r1dev;
-        let r1qa = json[0].r1qa; 
-        confirmDataRead(1, r1st, r1us, r1dv, r1qa);
-
-        let r2st = json[0].r2status;
-        let r2us = json[0].r2userstory;
-        let r2dv = json[0].r2dev;
-        let r2qa = json[0].r2qa; 
-        confirmDataRead(2, r2st, r2us, r2dv, r2qa);
-
-        let r3st = json[0].r3status;
-        let r3us = json[0].r3userstory;
-        let r3dv = json[0].r3dev;
-        let r3qa = json[0].r3qa; 
-        confirmDataRead(3, r3st, r3us, r3dv, r3qa);
-
-        let r4st = json[0].r4status;
-        let r4us = json[0].r4userstory;
-        let r4dv = json[0].r4dev;
-        let r4qa = json[0].r4qa; 
-        confirmDataRead(4, r4st, r4us, r4dv, r4qa);
-
-        let r5st = json[0].r5status;
-        let r5us = json[0].r5userstory;
-        let r5dv = json[0].r5dev;
-        let r5qa = json[0].r5qa; 
-        confirmDataRead(5, r5st, r5us, r5dv, r5qa);
-
-        let r6st = json[0].r6status;
-        let r6us = json[0].r6userstory;
-        let r6dv = json[0].r6dev;
-        let r6qa = json[0].r6qa; 
-        confirmDataRead(6, r6st, r6us, r6dv, r6qa);
-    });
-}
-
-function addZero(i) {
-    if (i < 10) {
-        i = "0" + i;
-    }
-    return i;
-}
-
-function compareLog() {
-    var logjson = "log0.json";
-    let logn, r, log1, log2, log3, log4, log5, log6;
-
-    $.getJSON(logjson, function(json) {
         r = 1;
-        log1 = json[0].log1;
-        logn = $(`#log-output${r}`).html();
-        if (log1 != logn) {
-            console.log(`NEW LOG ${logn}`);
-        } else {
-            console.log(`OLD LOG ${log1}`);
-        }
-    });
-
-}
-
-function generateOutputData(row, oldstatus, olddev, date, time) {
-    let env = $(`#row${row}-env`).html();
-    let sts = $(`#r${row}st-f`).html();
-    let usn = $(`#r${row}us-f`).html();
-    let dev = $(`#r${row}dv-f`).html();
-    let qat = $(`#r${row}qa-f`).html();
-    let result;
-    if (oldstatus != sts && sts == "AVAILABLE") {
-        result = `Changed to ${sts} by ${olddev} on ${date} at ${time}`;
-    } else if (oldstatus != sts && sts == "UNAVAILABLE") {
-        result = `Changed to ${sts} US${usn} by ${dev} on ${date} at ${time}`;
-    } else {
-        //result = ` No data logged at this time `;
-        result = `ENV ${sts} ${usn} ${dev} ${qat}`;
-    }
-    $(`#log-output${row}`).html(`0${row} | ${env} : ${result} .`);
-}
-
-function readLog() {
-    var oldurl = "env.json";
-    let r, oldst, olddev;
-    var d = new Date();
-    var date = `${(d.getMonth()+1)}/${d.getDate()}/${d.getFullYear()}`;
-    var hr = d.getHours();
-    var mn = addZero(d.getMinutes());
-    var sc = addZero(d.getSeconds());
-    var ampm = "am";
-    if (hr > 12) { hr -= 12; ampm = "pm"; };
-    var time = `${hr}:${mn}:${sc} ${ampm}`;
-
-    $.getJSON(oldurl, function(json) {
-        r = 1;
-        oldst = json[0].r1status;
-        olddev = json[0].r1dev;
-        generateOutputData(r, oldst, olddev, date, time);
+        var row1st = json[0].r1status;
+        var row1us = json[0].r1userstory;
+        var row1dv = json[0].r1dev;
+        var row1qa = json[0].r1qa;
+        $(`#r${r}st-f`).html(`${row1st}`);
+        $(`#r${r}us-f`).html(`${row1us}`);
+        $(`#r${r}dv-f`).html(`${row1dv}`);
+        $(`#r${r}qa-f`).html(`${row1qa}`);
+        handleStatusColor(r, row1st)
         r = 2;
-        oldst = json[0].r2status;
-        olddev = json[0].r2dev;
-        generateOutputData(r, oldst, olddev, date, time);
+        var row2st = json[0].r2status;
+        var row2us = json[0].r2userstory;
+        var row2dv = json[0].r2dev;
+        var row2qa = json[0].r2qa;
+        $(`#r${r}st-f`).html(`${row2st}`);
+        $(`#r${r}us-f`).html(`${row2us}`);
+        $(`#r${r}dv-f`).html(`${row2dv}`);
+        $(`#r${r}qa-f`).html(`${row2qa}`);
+        handleStatusColor(r, row2st)
         r = 3;
-        oldst = json[0].r3status;
-        olddev = json[0].r3dev;
-        generateOutputData(r, oldst, olddev, date, time);
+        var row3st = json[0].r3status;
+        var row3us = json[0].r3userstory;
+        var row3dv = json[0].r3dev;
+        var row3qa = json[0].r3qa;
+        $(`#r${r}st-f`).html(`${row3st}`);
+        $(`#r${r}us-f`).html(`${row3us}`);
+        $(`#r${r}dv-f`).html(`${row3dv}`);
+        $(`#r${r}qa-f`).html(`${row3qa}`);
+        handleStatusColor(r, row3st)
         r = 4;
-        oldst = json[0].r4status;
-        olddev = json[0].r4dev;
-        generateOutputData(r, oldst, olddev, date, time);
-        r = 5;
-        oldst = json[0].r5status;
-        olddev = json[0].r5dev;
-        generateOutputData(r, oldst, olddev, date, time);
-        r = 6;
-        oldst = json[0].r6status;
-        olddev = json[0].r6dev;
-        generateOutputData(r, oldst, olddev, date, time);
+        var row4st = json[0].r4status;
+        var row4us = json[0].r4userstory;
+        var row4dv = json[0].r4dev;
+        var row4qa = json[0].r4qa;
+        $(`#r${r}st-f`).html(`${row4st}`);
+        $(`#r${r}us-f`).html(`${row4us}`);
+        $(`#r${r}dv-f`).html(`${row4dv}`);
+        $(`#r${r}qa-f`).html(`${row4qa}`);
+        handleStatusColor(r, row4st)
     });
+}
+
+function loadLogConsole() {
+    let r = 0;
+    var url = "log.json";
+    $.getJSON(url, function(json) {
+        r = 1;
+        var row1 = json[0].log1;
+        $(`#log-output${r}`).html(`${row1}`);
+        r = 2;
+        var row2 = json[0].log2;
+        $(`#log-output${r}`).html(`${row2}`);
+        r = 3;
+        var row3 = json[0].log3;
+        $(`#log-output${r}`).html(`${row3}`);
+        r = 4;
+        var row4 = json[0].log4;
+        $(`#log-output${r}`).html(`${row4}`);
+    });
+}
+
+function handleAppLoad() {
+    setFocus();
+    clearReserveGrid();
+    loadUnreserveGrid();
+    loadLogConsole();
 }
 
 function handleSelectUnselected(rownum, rowstatus, rowuserstory, rowdev, rowqa) {
@@ -168,7 +121,7 @@ function handleSelectUnselected(rownum, rowstatus, rowuserstory, rowdev, rowqa) 
     if (rowuserstory === "" || rowuserstory === " ") {
         //Keep data
     } else {
-        $(`#r${rownum}us-f`).html(`${rowuserstory}`);
+        $(`#r${rownum}us-f`).html(`US${rowuserstory}`);
     }
     if (rowdev != "SELECT") {
         $(`#r${rownum}dv-f`).html(`${rowdev}`);
@@ -178,55 +131,35 @@ function handleSelectUnselected(rownum, rowstatus, rowuserstory, rowdev, rowqa) 
     }
 }
 
-var request;
+function addZero(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+}
 
-function handleUpdateClick() {
-    $('#btn-update').on('click', function(e) {
-        e.preventDefault();
+function getDate() {
+    var d = new Date();
+    var date = `${(d.getMonth()+1)}/${d.getDate()}/${d.getFullYear()}`;
+    return date;
+}
 
-        let r1Status = $('#status-dropbox-dev').val().toUpperCase();
-        let r1Userstory = $('#us-number-textbox-dev').val();
-        let r1Dev = $('#dev-dropbox-dev').val().toUpperCase();
-        let r1Qa = $('#qa-dropbox-dev').val().toUpperCase();
-        handleSelectUnselected(1, r1Status, r1Userstory, r1Dev, r1Qa);
+function getTime() {
+    var d = new Date();
+    var hr = d.getHours();
+    var mn = addZero(d.getMinutes());
+    var sc = addZero(d.getSeconds());
+    var ampm = "am";
+    if (hr > 12) { hr -= 12; ampm = "pm"; };
+    var time = `${hr}:${mn}:${sc} ${ampm}`;
+    return time;
+}
 
-        let r2Status = $('#status-dropbox-test').val().toUpperCase();
-        let r2Userstory = $('#us-number-textbox-test').val();
-        let r2Dev = $('#dev-dropbox-test').val().toUpperCase();
-        let r2Qa = $('#qa-dropbox-test').val().toUpperCase();
-        handleSelectUnselected(2, r2Status, r2Userstory, r2Dev, r2Qa);
-
-        let r3Status = $('#status-dropbox-test1').val().toUpperCase();
-        let r3Userstory = $('#us-number-textbox-test1').val();
-        let r3Dev = $('#dev-dropbox-test1').val().toUpperCase();
-        let r3Qa = $('#qa-dropbox-test1').val().toUpperCase();
-        handleSelectUnselected(3, r3Status, r3Userstory, r3Dev, r3Qa);
-
-        let r4Status = $('#status-dropbox-test2').val().toUpperCase();
-        let r4Userstory = $('#us-number-textbox-test2').val();
-        let r4Dev = $('#dev-dropbox-test2').val().toUpperCase();
-        let r4Qa = $('#qa-dropbox-test2').val().toUpperCase();
-        handleSelectUnselected(4, r4Status, r4Userstory, r4Dev, r4Qa);
-
-        let r5Status = $('#status-dropbox-test3').val().toUpperCase();
-        let r5Userstory = $('#us-number-textbox-test3').val();
-        let r5Dev = $('#dev-dropbox-test3').val().toUpperCase();
-        let r5Qa = $('#qa-dropbox-test3').val().toUpperCase();
-        handleSelectUnselected(5, r5Status, r5Userstory, r5Dev, r5Qa);
-
-        let r6Status = $('#status-dropbox-test4').val().toUpperCase();
-        let r6Userstory = $('#us-number-textbox-test4').val();
-        let r6Dev = $('#dev-dropbox-test4').val().toUpperCase();
-        let r6Qa = $('#qa-dropbox-test4').val().toUpperCase();
-        handleSelectUnselected(6, r6Status, r6Userstory, r6Dev, r6Qa);
-
-        changeRowColor();
-        clearInputs();
-        postToGrid();
-        readLog();
-        postToLog();
-        compareLog();
-    });
+function outputToLogReserved(row, date, time) {
+    let env = $(`#row${row}-env`).html();
+    let sts = $(`#r${row}st-f`).html();
+    let dev = $(`#r${row}dv-f`).html();
+    $(`#log-output${row}`).html(`0${row} | ${env} : Changed to ${sts} by ${dev} on ${date} at ${time} .`);
 }
 
 function postToGrid() {
@@ -250,19 +183,9 @@ function postToGrid() {
     var r4dv = $("#r4dv-f").html();
     var r4qa = $("#r4qa-f").html();
 
-    var r5st = $("#r5st-f").html();
-    var r5us = $("#r5us-f").html();
-    var r5dv = $("#r5dv-f").html();
-    var r5qa = $("#r5qa-f").html();
-
-    var r6st = $("#r6st-f").html();
-    var r6us = $("#r6us-f").html();
-    var r6dv = $("#r6dv-f").html();
-    var r6qa = $("#r6qa-f").html();
-
     $.ajax({
         type: "POST",
-        url: "/formProcess.php",
+        url: "/env.php",
         dataType: "json",
         cache: false,
         data: {
@@ -281,15 +204,7 @@ function postToGrid() {
             r4st:r4st,
             r4us:r4us,
             r4dv:r4dv,
-            r4qa:r4qa,
-            r5st:r5st,
-            r5us:r5us,
-            r5dv:r5dv,
-            r5qa:r5qa,
-            r6st:r6st,
-            r6us:r6us,
-            r6dv:r6dv,
-            r6qa:r6qa
+            r4qa:r4qa
           },
         success : function(data){
             if (data.code == "200"){
@@ -307,8 +222,6 @@ function postToLog() {
     var log2 = $("#log-output2").html();
     var log3 = $("#log-output3").html();
     var log4 = $("#log-output4").html();
-    var log5 = $("#log-output5").html();
-    var log6 = $("#log-output6").html();
 
     $.ajax({
         type: "POST",
@@ -319,9 +232,7 @@ function postToLog() {
             log1:log1,
             log2:log2,
             log3:log3,
-            log4:log4,
-            log5:log5,
-            log6:log6
+            log4:log4
           },
         success : function(data){
             if (data.code == "200"){
@@ -334,279 +245,169 @@ function postToLog() {
     });
 }
 
-function handleStatusChanges(rownum, rowstatus) {
-    if (rowstatus == "UNAVAILABLE") {
-        handleStatusRedColorIndication(rownum);
-    }
-    if (rowstatus == "AVAILABLE") {
-        handleStatusGreenColorIndication(rownum);
-        resetOutputGrid(rownum);
-    }
-}
-
-function changeRowColor() {
-    let r1status = $('#status-dropbox-dev').val().toUpperCase();
-    handleStatusChanges(1, r1status);
-
-    let r2status = $('#status-dropbox-test').val().toUpperCase();
-    handleStatusChanges(2, r2status);
-
-    let r3status = $('#status-dropbox-test1').val().toUpperCase();
-    handleStatusChanges(3, r3status);
-
-    let r4status = $('#status-dropbox-test2').val().toUpperCase();
-    handleStatusChanges(4, r4status);
-
-    let r5status = $('#status-dropbox-test3').val().toUpperCase();
-    handleStatusChanges(5, r5status);
-
-    let r6status = $('#status-dropbox-test4').val().toUpperCase();
-    handleStatusChanges(6, r6status);
-}
-
-function clearInputs() {
-    $('#status-dropbox-dev').prop('selectedIndex', 0);
-    $('#us-number-textbox-dev').val('');
-    $('#dev-dropbox-dev').prop('selectedIndex', 0);
-    $('#qa-dropbox-dev').prop('selectedIndex', 0);
-
-    $('#status-dropbox-test').prop('selectedIndex', 0);
-    $('#us-number-textbox-test').val('');
-    $('#dev-dropbox-test').prop('selectedIndex', 0);
-    $('#qa-dropbox-test').prop('selectedIndex', 0);
-
-    $('#status-dropbox-test1').prop('selectedIndex', 0);
-    $('#us-number-textbox-test1').val('');
-    $('#dev-dropbox-test1').prop('selectedIndex', 0);
-    $('#qa-dropbox-test1').prop('selectedIndex', 0);
-
-    $('#status-dropbox-test2').prop('selectedIndex', 0);
-    $('#us-number-textbox-test2').val('');
-    $('#dev-dropbox-test2').prop('selectedIndex', 0);
-    $('#qa-dropbox-test2').prop('selectedIndex', 0);
-
-    $('#status-dropbox-test3').prop('selectedIndex', 0);
-    $('#us-number-textbox-test3').val('');
-    $('#dev-dropbox-test3').prop('selectedIndex', 0);
-    $('#qa-dropbox-test3').prop('selectedIndex', 0);
-
-    $('#status-dropbox-test4').prop('selectedIndex', 0);
-    $('#us-number-textbox-test4').val('');
-    $('#dev-dropbox-test4').prop('selectedIndex', 0);
-    $('#qa-dropbox-test4').prop('selectedIndex', 0);
-}
-
-function resetOutputGrid(rownum) {
-    $(`#row${rownum}-userstory`).html(
-        `<span id="r${rownum}us-f"></span>`
-    );
-    $(`#row${rownum}-dev`).html(
-        `<span id="r${rownum}dv-f"></span>`
-    );
-    $(`#row${rownum}-qa`).html(
-        `<span id="r${rownum}qa-f"></span>`
-    );
-}
-
-function setStatusToAvailable(rownum) {
-    $(`#row${rownum}-status`).html(
-        `<span id="r${rownum}st-f">AVAILABLE</span>`
-    );
-}
-
-function handleFreeupClick() {
-    let row = 0;
-    $('#r1-btn-available').on('click', function(e) {
+function logicForReserveButton(row) {
+    let rSta, rUst, rDev, rQat;
+    $(`#r${row}-btn-reserve`).on('click', function(e) {
         e.preventDefault();
 
-        row = 1;
-        resetOutputGrid(row);
-        setStatusToAvailable(row)
-        handleStatusGreenColorIndication(row);
-        postToGrid();
-        readLog();
-        postToLog();
-    });
+        rSta = $(`#status-dropbox-test${row}`).text().toUpperCase();
+        rUst = $(`#us-number-textbox-test${row}`).val();
+        rDev = $(`#dev-dropbox-test${row}`).val().toUpperCase();
+        rQat = $(`#qa-dropbox-test${row}`).val().toUpperCase();
 
-    $('#r2-btn-available').on('click', function(e) {
-        e.preventDefault();
-
-        row = 2;
-        setStatusToAvailable(row)
-        handleStatusGreenColorIndication(row);
-        resetOutputGrid(row);
-        postToGrid();
-        readLog();
-        postToLog();
-    });
-
-    $('#r3-btn-available').on('click', function(e) {
-        e.preventDefault();
-
-        row = 3;
-        setStatusToAvailable(row)
-        handleStatusGreenColorIndication(row);
-        resetOutputGrid(row);
-        postToGrid();
-        readLog();
-        postToLog();
-    });
-
-    $('#r4-btn-available').on('click', function(e) {
-        e.preventDefault();
-
-        row = 4;
-        setStatusToAvailable(row)
-        handleStatusGreenColorIndication(row);
-        resetOutputGrid(row);
-        postToGrid();
-        readLog();
-        postToLog();
-    });
-
-    $('#r5-btn-available').on('click', function(e) {
-        e.preventDefault();
-
-        row = 5;
-        setStatusToAvailable(row)
-        handleStatusGreenColorIndication(row);
-        resetOutputGrid(row);
-        postToGrid();
-        readLog();
-        postToLog();
-    });
-
-    $('#r6-btn-available').on('click', function(e) {
-        e.preventDefault();
-
-        row = 6;
-        setStatusToAvailable(row)
-        handleStatusGreenColorIndication(row);
-        resetOutputGrid(row);
-        postToGrid();
-        readLog();
-        postToLog();
+        if (rUst.length > 0 && rDev != "SELECT") {
+            handleSelectUnselected(row, rSta, rUst, rDev, rQat);
+            handleStatusColor(row, rSta);
+            outputToLogReserved(row, getDate(), getTime());
+            postToGrid();
+            postToLog();
+            clearReserveGrid();
+            
+        }
     });
 }
 
-function loadData() {
-    $('#r1st-f').html(GRID.r1st);
-    $('#r1us-f').html(GRID.r1us);
-    $('#r1dv-f').html(GRID.r1dv);
-    $('#r1qa-f').html(GRID.r1qa);
-
-    $('#r2st-f').html(GRID.r2st);
-    $('#r2us-f').html(GRID.r2us);
-    $('#r2dv-f').html(GRID.r2dv);
-    $('#r2qa-f').html(GRID.r2qa);
-
-    $('#r3st-f').html(GRID.r3st);
-    $('#r3us-f').html(GRID.r3us);
-    $('#r3dv-f').html(GRID.r3dv);
-    $('#r3qa-f').html(GRID.r3qa);
-
-    $('#r4st-f').html(GRID.r4st);
-    $('#r4us-f').html(GRID.r4us);
-    $('#r4dv-f').html(GRID.r4dv);
-    $('#r4qa-f').html(GRID.r4qa);
-
-    $('#r5st-f').html(GRID.r5st);
-    $('#r5us-f').html(GRID.r5us);
-    $('#r5dv-f').html(GRID.r5dv);
-    $('#r5qa-f').html(GRID.r5qa);
-
-    $('#r6st-f').html(GRID.r6st);
-    $('#r6us-f').html(GRID.r6us);
-    $('#r6dv-f').html(GRID.r6dv);
-    $('#r6qa-f').html(GRID.r6qa);
-
-    highlightRow();
+function handleReserveButtonOne() {
+    logicForReserveButton(1);
 }
 
-function highlightRow() {
-    let r1st = $('#r1st-f').html();
-    handleStatusChanges(1, r1st);
-    let r2st = $('#r2st-f').html();
-    handleStatusChanges(2, r2st);
-    let r3st = $('#r3st-f').html();
-    handleStatusChanges(3, r3st);
-    let r41st = $('#r4st-f').html();
-    handleStatusChanges(4, r41st);
-    let r5st = $('#r5st-f').html();
-    handleStatusChanges(5, r5st);
-    let r6st = $('#r6st-f').html();
-    handleStatusChanges(6, r6st);
+function handleReserveButtonTwo() {
+    logicForReserveButton(2);
 }
 
-function refreshData() {
-    location.reload(true);
-    writeData();
+function handleReserveButtonThree() {
+    logicForReserveButton(3);
+}
+
+function handleReserveButtonFour() {
+    logicForReserveButton(4);
+}
+
+function postToUnreserveGrid() {
+    let r1st, r1us, r1dv, r1qa;
+    r1st = $(`#r1st-f`).html();
+    r1us = $(`#r1us-f`).html();
+    r1dv = $(`#r1dv-f`).html();
+    r1qa = $(`#r1qa-f`).html();
+    let r2st, r2us, r2dv, r2qa;
+    r2st = $(`#r2st-f`).text();
+    r2us = $(`#r2us-f`).text();
+    r2dv = $(`#r2dv-f`).text();
+    r2qa = $(`#r2qa-f`).text();
+    let r3st, r3us, r3dv, r3qa;
+    r3st = $(`#r3st-f`).text();
+    r3us = $(`#r3us-f`).text();
+    r3dv = $(`#r3dv-f`).text();
+    r3qa = $(`#r3qa-f`).text();
+    let r4st, r4us, r4dv, r4qa;
+    r4st = $(`#r4st-f`).text();
+    r4us = $(`#r4us-f`).text();
+    r4dv = $(`#r4dv-f`).text();
+    r4qa = $(`#r4qa-f`).text();
+
+    $.ajax({
+        type: "POST",
+        url: "/env.php",
+        dataType: "json",
+        cache: false,
+        data: {
+            r1st:r1st,
+            r1us:r1us,
+            r1dv:r1dv,
+            r1qa:r1qa,
+            r2st:r2st,
+            r2us:r2us,
+            r2dv:r2dv,
+            r2qa:r2qa,
+            r3st:r3st,
+            r3us:r3us,
+            r3dv:r3dv,
+            r3qa:r3qa,
+            r4st:r4st,
+            r4us:r4us,
+            r4dv:r4dv,
+            r4qa:r4qa
+          },
+        success : function(data){
+            if (data.code == "200"){
+                alert("Success: " + data.msg);
+            } else {
+                $(".display-error").html("<ul>"+data.msg+"</ul>");
+                $(".display-error").css("display","block");
+            }
+        }
+    });
+}
+
+function logicForUnreserveButton(row) {
+    let env, rSta, rUst, rDev, rQat;
+    $(`#r${row}-btn-available`).on('click', function(e) {
+        e.preventDefault();
+
+        rSta = "AVAILABLE";
+        if (row == "1") {
+            env = "TEST1";
+        } else if (row == "2") {
+            env = "TEST2";
+        } else if (row == "3") {
+            env = "TEST3";
+        } else if (row == "4") {
+            env = "TEST4";
+        } else {
+            env = "ENVIRONMENT UNKNOWN"
+        }
+        rUst = $(`#r${row}us-f`).text();
+        rDev = $(`#r${row}dv-f`).text();
+        rQat = $(`#r${row}qa-f`).text();
+
+        $(`#log-output${row}`).html(`0${row} | ${env} : Made ${rSta} by ${rDev} on ${getDate()} at ${getTime()} .`);
+        postToLog();
+
+        //Set to Available and clear row then set row to green
+        $(`#r${row}st-f`).html(rSta);
+        $(`#r${row}us-f`).html("");
+        $(`#r${row}dv-f`).html("");
+        $(`#r${row}qa-f`).html("");
+        handleStatusGreenColorIndication(row);
+
+        postToUnreserveGrid();
+    });
+}
+
+function handleUnreserveButtonOne() {
+    logicForUnreserveButton(1);
+}
+
+function handleUnreserveButtonTwo() {
+    logicForUnreserveButton(2);
+}
+
+function handleUnreserveButtonThree() {
+    logicForUnreserveButton(3);
+}
+
+function handleUnreserveButtonFour() {
+    logicForUnreserveButton(4);
 }
 
 function handleRefreshClick() {
     $('#btn-refresh').on('click', function(e) {
-        refreshData();
-    });
-}
-
-function writeData() {
-    let r;
-    var url = "BOMB.json";
-    $.getJSON(url, function(json) {
-        r = 1;
-        $(`#r1st-f`).html(json[0].r1status);
-        $(`#r1us-f`).html(json[0].r1userstory);
-        $(`#r1dv-f`).html(json[0].r1dev);
-        $(`#r1qa-f`).html(json[0].r1qa);
-        let r1st = $(`#r1st-f`).html();
-        handleStatusChanges(r, r1st);
-        r = 2;
-        $(`#r2st-f`).html(json[0].r2status);
-        $(`#r2us-f`).html(json[0].r2userstory);
-        $(`#r2dv-f`).html(json[0].r2dev);
-        $(`#r2qa-f`).html(json[0].r2qa);
-        let r2st = $(`#r2st-f`).html();
-        handleStatusChanges(r, r2st);
-        r = 3;
-        $(`#r3st-f`).html(json[0].r3status);
-        $(`#r3us-f`).html(json[0].r3userstory);
-        $(`#r3dv-f`).html(json[0].r3dev);
-        $(`#r3qa-f`).html(json[0].r3qa);
-        let r3st = $(`#r3st-f`).html();
-        handleStatusChanges(r, r3st);
-        r = 4;
-        $(`#r4st-f`).html(json[0].r4status);
-        $(`#r4us-f`).html(json[0].r4userstory);
-        $(`#r4dv-f`).html(json[0].r4dev);
-        $(`#r4qa-f`).html(json[0].r4qa);
-        let r4st = $(`#r4st-f`).html();
-        handleStatusChanges(r, r4st);
-        r = 5;
-        $(`#r5st-f`).html(json[0].r5status);
-        $(`#r5us-f`).html(json[0].r5userstory);
-        $(`#r5dv-f`).html(json[0].r5dev);
-        $(`#r5qa-f`).html(json[0].r5qa);
-        let r5st = $(`#r5st-f`).html();
-        handleStatusChanges(r, r5st);
-        r = 6;
-        $(`#r6st-f`).html(json[0].r6status);
-        $(`#r6us-f`).html(json[0].r6userstory);
-        $(`#r6dv-f`).html(json[0].r6dev);
-        $(`#r6qa-f`).html(json[0].r6qa);
-        let r6st = $(`#r6st-f`).html();
-        handleStatusChanges(r, r6st);
+        location.reload(true);
+        handleAppLoad();
     });
 }
 
 function startApp() {
-    writeData();
-    handleUpdateClick();
-    postToGrid();
-    handleFreeupClick();
+    handleAppLoad();
+    handleReserveButtonOne();
+    handleReserveButtonTwo();
+    handleReserveButtonThree();
+    handleReserveButtonFour();
+    handleUnreserveButtonOne();
+    handleUnreserveButtonTwo();
+    handleUnreserveButtonThree();
+    handleUnreserveButtonFour();
     handleRefreshClick();
-    readLog();
-    postToLog();
-    compareLog();
 }
 
 $(startApp);
