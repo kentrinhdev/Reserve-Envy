@@ -7,7 +7,8 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" CONTENT="no-cache">
     <meta http-equiv="Expires" CONTENT="0">
-    <title>ENV Reservation</title>
+    <title>Reserve-ENV</title>
+    <link href="https://fonts.googleapis.com/css?family=Orbitron&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript">
@@ -57,596 +58,441 @@
         </script>
 </head>
 <body>
-    <div id="main-frame">
-        <!-- ///////////////////////////////////////////////////////// -->
-        <!-- TOP TABLE HEADERS -->
-        <!-- ///////////////////////////////////////////////////////// -->
-        <div class="table-head">
-            <div class="child-cell numbering">
-                <label for="header-num">&nbsp;[ # ]</label> 
-            </div>
-            <div class="child-cell status">
-                <label for="header-status">STATUS</label> 
-            </div>
-            <div class="child-cell environment">
-                <label for="header-env">ENVIRONMENT</label> 
-            </div>
-            <div class="child-cell userstory">
-                <label for="header-usnumber">US_NUMBER</label> 
-            </div>
-            <div class="child-cell environment">
-                <label for="header-developer">DEVELOPER</label>
-            </div>
-            <div class="child-cell environment">
-                <label for="header-qaanalyst">QA_ANALYST</label>
-            </div>
-        </div>
-        <!-- ///////////////////////////////////////////////////////// -->
-        <!-- END TABLE HEADERS -->
-        <!-- ///////////////////////////////////////////////////////// -->
+    <div class="canvas-box">
 
-        <br>
-        <div class="line"><img class="line-img" src="images/line.png" alt=""></div>
-        <br>
-
-        <form class="reservation-form" id="reservation-form">
-            <fieldset class="reservation-fieldset">
-
+        <div class="main-frame">
+            <!-- ///////////////////////////////////////////////////////// -->
+            <!-- TOP TABLE HEADERS -->
+            <!-- ///////////////////////////////////////////////////////// -->
+            <div class="table-head">
                 <div class="child-cell numbering">
-                    <span class="num-label">&nbsp;01</span>
+                    <label for="header-num">&nbsp;[ # ]</label> 
                 </div>
                 <div class="child-cell status">
-                    <select class="select status-select" id="status-dropbox-dev" name="row1status">
-                        <option class="label-text-grey" value="select">Select Status</option>
-                        <!-- <option value="available">Available</option> -->
-                        <option value="unavailable">Unavailable</option>
-                    </select>
+                    <label for="header-status">STATUS</label> 
                 </div>
                 <div class="child-cell environment">
-                    <label class="env-label" for="env-dev">DEV</label>
+                    <label for="header-env">ENVIRONMENT</label> 
                 </div>
                 <div class="child-cell userstory">
-                    <label class="us-label" for="us-number">US</label> 
-                    <input class="us-number" id="us-number-textbox-dev" name="row1userstory" type="text" maxlength="7" onkeydown="return ( event.ctrlKey || event.altKey 
-                    || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false) 
-                    || (95<event.keyCode && event.keyCode<106)
-                    || (event.keyCode==8) || (event.keyCode==9) 
-                    || (event.keyCode>34 && event.keyCode<40) 
-                    || (event.keyCode==46) )" />
+                    <label class="header-required" for="header-usnumber">US_NUMBER</label> 
                 </div>
-                <div class="child-cell environment">
-                    <select class="select dev-select" id="dev-dropbox-dev" name="row1developer">
-                        <option class="label-text-grey" value="select">Select DEV</option>
-                        <option value="hani">Hani</option>
-                        <option value="huyen">Huyen</option>
-                        <option value="ken">Ken</option>
-                        <option value="leslie">Leslie</option>
-                        <option value="nilar">Nilar</option>
-                        <option value="rafael">Rafael</option>
-                        <option value="ulises">Ulises</option>
-                    </select>
+                <div class="child-cell developer">
+                    <label class="header-required" for="header-developer">DEVELOPER</label>
                 </div>
-                <div class="child-cell environment">
-                    <select class="select qa-select" id="qa-dropbox-dev" name="row1qa">
-                        <option class="label-text-grey" value="select">Select QA</option>
-                        <option value="julio">Julio</option>
-                        <option value="kim">Kim</option>
-                        <option value="sarika">Sarika</option>
-                        <option value="stephanie">Stephanie</option>
-                        <option value="tony">Tony</option>
-                    </select>
+                <div class="child-cell quality">
+                    <label for="header-qaanalyst">QA_ANALYST</label>
                 </div>
-
-                <br>
-
-                <div class="child-cell numbering">
-                    <span class="num-label">&nbsp;02</span>
+                <div class="child-cell title">
+                    <label for="header-app-title">RESERVE-ENV</label>
                 </div>
-                <div class="child-cell status">
-                    <select class="select status-select" id="status-dropbox-test">
-                        <option class="label-text-grey" value="select">Select Status</option>
-                        <!-- <option value="available">Available</option> -->
-                        <option value="unavailable">Unavailable</option>
-                    </select>
-                </div>
-                <div class="child-cell environment">
-                    <label class="env-label" for="env-test">TEST</label> 
-                </div>
-                <div class="child-cell userstory">
-                    <label class="us-label" for="us-number">US</label> 
-                    <input class="us-number" id="us-number-textbox-test" name="us-number" type="text" maxlength="7" onkeydown="return ( event.ctrlKey || event.altKey 
-                    || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false) 
-                    || (95<event.keyCode && event.keyCode<106)
-                    || (event.keyCode==8) || (event.keyCode==9) 
-                    || (event.keyCode>34 && event.keyCode<40) 
-                    || (event.keyCode==46) )" />
-                </div>
-                <div class="child-cell environment">
-                    <select class="select dev-select" id="dev-dropbox-test">
-                        <option class="label-text-grey" value="select">Select DEV</option>
-                        <option value="hani">Hani</option>
-                        <option value="huyen">Huyen</option>
-                        <option value="ken">Ken</option>
-                        <option value="leslie">Leslie</option>
-                        <option value="nilar">Nilar</option>
-                        <option value="rafael">Rafael</option>
-                        <option value="ulises">Ulises</option>
-                    </select>
-                </div>
-                <div class="child-cell environment">
-                    <select class="select qa-select" id="qa-dropbox-test">
-                        <option class="label-text-grey" value="select">Select QA</option>
-                        <option value="julio">Julio</option>
-                        <option value="kim">Kim</option>
-                        <option value="sarika">Sarika</option>
-                        <option value="stephanie">Stephanie</option>
-                        <option value="tony">Tony</option>
-                    </select>
-                </div>
-
-                <br>
-
-                <div class="child-cell numbering">
-                    <span class="num-label">&nbsp;03</span>
-                </div>
-                <div class="child-cell status">
-                    <select class="select status-select" id="status-dropbox-test1">
-                        <option class="label-text-grey" value="select">Select Status</option>
-                        <!-- <option value="available">Available</option> -->
-                        <option value="unavailable">Unavailable</option>
-                    </select>
-                </div>
-                <div class="child-cell environment">
-                    <label class="env-label" for="env-test1">TEST1</label> 
-                </div>
-                <div class="child-cell userstory">
-                    <label class="us-label" for="us-number">US</label> 
-                    <input class="us-number" id="us-number-textbox-test1" name="us-number" type="text" maxlength="7" onkeydown="return ( event.ctrlKey || event.altKey 
-                    || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false) 
-                    || (95<event.keyCode && event.keyCode<106)
-                    || (event.keyCode==8) || (event.keyCode==9) 
-                    || (event.keyCode>34 && event.keyCode<40) 
-                    || (event.keyCode==46) )" />
-                </div>
-                <div class="child-cell environment">
-                    <select class="select dev-select" id="dev-dropbox-test1">
-                        <option class="label-text-grey" value="select">Select DEV</option>
-                        <option value="hani">Hani</option>
-                        <option value="huyen">Huyen</option>
-                        <option value="ken">Ken</option>
-                        <option value="leslie">Leslie</option>
-                        <option value="nilar">Nilar</option>
-                        <option value="rafael">Rafael</option>
-                        <option value="ulises">Ulises</option>
-                    </select>
-                </div>
-                <div class="child-cell environment">
-                    <select class="select qa-select" id="qa-dropbox-test1">
-                        <option class="label-text-grey" value="select">Select QA</option>
-                        <option value="julio">Julio</option>
-                        <option value="kim">Kim</option>
-                        <option value="sarika">Sarika</option>
-                        <option value="stephanie">Stephanie</option>
-                        <option value="tony">Tony</option>
-                    </select>
-                </div>
-
-                <br>
-
-                <div class="child-cell numbering">
-                    <span class="num-label">&nbsp;04</span>
-                </div>
-                <div class="child-cell status">
-                    <select class="select status-select" id="status-dropbox-test2">
-                        <option class="label-text-grey" value="select">Select Status</option>
-                        <!-- <option value="available">Available</option> -->
-                        <option value="unavailable">Unavailable</option>
-                    </select>
-                </div>
-                <div class="child-cell environment">
-                    <label class="env-label" for="env-test2">TEST2</label> 
-                </div>
-                <div class="child-cell userstory">
-                    <label class="us-label" for="us-number">US</label> 
-                    <input class="us-number" id="us-number-textbox-test2" name="us-number" type="text" maxlength="7" onkeydown="return ( event.ctrlKey || event.altKey 
-                    || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false) 
-                    || (95<event.keyCode && event.keyCode<106)
-                    || (event.keyCode==8) || (event.keyCode==9) 
-                    || (event.keyCode>34 && event.keyCode<40) 
-                    || (event.keyCode==46) )" />
-                </div>
-                <div class="child-cell environment">
-                    <select class="select dev-select" id="dev-dropbox-test2">
-                        <option class="label-text-grey" value="select">Select DEV</option>
-                        <option value="hani">Hani</option>
-                        <option value="huyen">Huyen</option>
-                        <option value="ken">Ken</option>
-                        <option value="leslie">Leslie</option>
-                        <option value="nilar">Nilar</option>
-                        <option value="rafael">Rafael</option>
-                        <option value="ulises">Ulises</option>
-                    </select>
-                </div>
-                <div class="child-cell environment">
-                    <select class="select qa-select" id="qa-dropbox-test2">
-                        <option class="label-text-grey" value="select">Select QA</option>
-                        <option value="julio">Julio</option>
-                        <option value="kim">Kim</option>
-                        <option value="sarika">Sarika</option>
-                        <option value="stephanie">Stephanie</option>
-                        <option value="tony">Tony</option>
-                    </select>
-                </div>
-
-                <br>
-
-                <div class="child-cell numbering">
-                    <span class="num-label">&nbsp;05</span>
-                </div>
-                <div class="child-cell status">
-                    <select class="select status-select" id="status-dropbox-test3">
-                        <option class="label-text-grey" value="select">Select Status</option>
-                        <!-- <option value="available">Available</option> -->
-                        <option value="unavailable">Unavailable</option>
-                    </select>
-                </div>
-                <div class="child-cell environment">
-                    <label class="env-label" for="env-test3">TEST3</label> 
-                </div>
-                <div class="child-cell userstory">
-                    <label class="us-label" for="us-number">US</label> 
-                    <input class="us-number" id="us-number-textbox-test3" name="us-number" type="text" maxlength="7" onkeydown="return ( event.ctrlKey || event.altKey 
-                    || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false) 
-                    || (95<event.keyCode && event.keyCode<106)
-                    || (event.keyCode==8) || (event.keyCode==9) 
-                    || (event.keyCode>34 && event.keyCode<40) 
-                    || (event.keyCode==46) )" />
-                </div>
-                <div class="child-cell environment">
-                        <select class="select dev-select" id="dev-dropbox-test3">
-                        <option class="label-text-grey" value="select">Select DEV</option>
-                        <option value="hani">Hani</option>
-                        <option value="huyen">Huyen</option>
-                        <option value="ken">Ken</option>
-                        <option value="leslie">Leslie</option>
-                        <option value="nilar">Nilar</option>
-                        <option value="rafael">Rafael</option>
-                        <option value="ulises">Ulises</option>
-                    </select>
-                </div>
-                <div class="child-cell environment">
-                    <select class="select qa-select" id="qa-dropbox-test3">
-                        <option class="label-text-grey" value="select">Select QA</option>
-                        <option value="julio">Julio</option>
-                        <option value="kim">Kim</option>
-                        <option value="sarika">Sarika</option>
-                        <option value="stephanie">Stephanie</option>
-                        <option value="tony">Tony</option>
-                    </select>
-                </div>
-
-                <br>
-
-                <div class="child-cell numbering">
-                    <span class="num-label">&nbsp;06</span>
-                </div>
-                <div class="child-cell status">
-                    <select class="select status-select" id="status-dropbox-test4">
-                        <option class="label-text-grey" value="select">Select Status</option>
-                        <!-- <option value="available">Available</option> -->
-                        <option value="unavailable">Unavailable</option>
-                    </select>
-                </div>
-                <div class="child-cell environment">
-                    <label class="env-label" for="env-test4">TEST4</label> 
-                </div>
-                <div class="child-cell userstory">
-                    <label class="us-label" for="us-number">US</label> 
-                    <input class="us-number" id="us-number-textbox-test4" name="us-number" type="text" maxlength="7" onkeydown="return ( event.ctrlKey || event.altKey 
-                    || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false) 
-                    || (95<event.keyCode && event.keyCode<106)
-                    || (event.keyCode==8) || (event.keyCode==9) 
-                    || (event.keyCode>34 && event.keyCode<40) 
-                    || (event.keyCode==46) )" />
-                </div>
-                <div class="child-cell environment">
-                    <select class="select dev-select" id="dev-dropbox-test4">
-                        <option class="label-text-grey" value="select">Select DEV</option>
-                        <option value="hani">Hani</option>
-                        <option value="huyen">Huyen</option>
-                        <option value="ken">Ken</option>
-                        <option value="leslie">Leslie</option>
-                        <option value="nilar">Nilar</option>
-                        <option value="rafael">Rafael</option>
-                        <option value="ulises">Ulises</option>
-                    </select>
-                </div>
-                <div class="child-cell environment">
-                    <select class="select qa-select" id="qa-dropbox-test4">
-                        <option class="label-text-grey" value="select">Select QA</option>
-                        <option value="julio">Julio</option>
-                        <option value="kim">Kim</option>
-                        <option value="sarika">Sarika</option>
-                        <option value="stephanie">Stephanie</option>
-                        <option value="tony">Tony</option>
-                    </select>
-                </div>
-
-                <br>
-
-                <div class="box-btn-update">
-                    <input class="btn btn-update" id="btn-update" type="submit" value="UPDATE" />
-                </div>
-
-            </fieldset>
-        </form>
-    <!-- END MAIN FRAME -->
-    </div><!-- /DIV ID MAIN FRAME -->
-
-    <br>
-    <div class="line"><img class="line-img-output" src="images/line.png" alt=""></div>
-    <br>
-
-    <!-- //////////////////////////////////////////////////////////////////////////// -->
-    <!-- TOP OUTPUT TABLE -->
-    <!-- //////////////////////////////////////////////////////////////////////////// -->
-    <div class="main-frame-output" id="main-frame">
-        <div class="child-cell-output numbering r1-numbering">
-            <span class="num-label num-label-output">&nbsp;01</span>
-        </div>
-        <div class="child-cell-output status r1-status">
-            <div class="cell row1-cell1" id="row1-status">
-                <!-- Dynamic Content -->
-                <span id="r1st-f"></span>
             </div>
-        </div>
-        <div class="child-cell-output environment r1-environment">
-            <label class="env-label env-label-output" id="row1-env" for="env-dev">DEV</label>
-        </div>
-        <div class="child-cell-output userstory r1-userstory">
-            <div class="cell row1-cell2" id="row1-userstory">
-                <!-- Dynamic Content -->
-                <span id="r1us-f"></span>
+            <!-- ///////////////////////////////////////////////////////// -->
+            <!-- END TABLE HEADERS -->
+            <!-- ///////////////////////////////////////////////////////// -->
+
+            <br>
+            <div class="line"><img class="line-img" src="images/line.png" alt=""></div>
+            <br>
+
+            <div class="form-box">
+                <form class="reservation-form" id="reservation-form">
+                    <fieldset class="reservation-fieldset">
+                        <div class="child-cell numbering">
+                            <span class="num-label">&nbsp;01</span>
+                        </div>
+                        <div class="child-cell status">
+                            <!-- <select class="select status-select" id="status-dropbox-test1">
+                                <option class="label-text-grey" value="select">Select Status</option>
+                                <option value="unavailable">Unavailable</option>
+                            </select> -->
+                            <label class="label-text-grey" id="status-dropbox-test1">unavailable</label>
+                        </div>
+                        <div class="child-cell environment">
+                            <label class="env-label" for="env-test1">TEST1</label> 
+                        </div>
+                        <div class="child-cell userstory">
+                            <label class="us-label" for="us-number">US</label> 
+                            <input class="us-number" id="us-number-textbox-test1" name="us-number" type="text" maxlength="7" onkeydown="return ( event.ctrlKey || event.altKey 
+                            || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false) 
+                            || (95<event.keyCode && event.keyCode<106)
+                            || (event.keyCode==8) || (event.keyCode==9) 
+                            || (event.keyCode>34 && event.keyCode<40) 
+                            || (event.keyCode==46) )" />
+                        </div>
+                        <div class="child-cell environment">
+                            <select class="select dev-select" id="dev-dropbox-test1">
+                                <option class="label-text-grey" value="select">Select DEV</option>
+                                <option value="hani">Hani</option>
+                                <option value="huyen">Huyen</option>
+                                <option value="ken">Ken</option>
+                                <option value="leslie">Leslie</option>
+                                <option value="nilar">Nilar</option>
+                                <option value="rafael">Rafael</option>
+                                <option value="ulises">Ulises</option>
+                            </select>
+                        </div>
+                        <div class="child-cell environment">
+                            <select class="select qa-select" id="qa-dropbox-test1">
+                                <option class="label-text-grey" value="select">Select QA</option>
+                                <option value="julio">Julio</option>
+                                <option value="kim">Kim</option>
+                                <option value="sarika">Sarika</option>
+                                <option value="stephanie">Stephanie</option>
+                                <option value="tony">Tony</option>
+                            </select>
+                        </div>
+
+                        <div class="child-cell cell-reserve">
+                            <input class="btn-output" id="r1-btn-reserve" type="submit" value="RESERVE" />
+                        </div>
+                
+                        <div class="break"></div>
+
+                        <div class="child-cell numbering">
+                            <span class="num-label">&nbsp;02</span>
+                        </div>
+                        <div class="child-cell status">
+                            <!-- <select class="select status-select" id="status-dropbox-test1">
+                                <option class="label-text-grey" value="select">Select Status</option>
+                                <option value="unavailable">Unavailable</option>
+                            </select> -->
+                            <label class="label-text-grey" id="status-dropbox-test2">unavailable</label>
+                        </div>
+                        <div class="child-cell environment">
+                            <label class="env-label" for="env-test2">TEST2</label> 
+                        </div>
+                        <div class="child-cell userstory">
+                            <label class="us-label" for="us-number">US</label> 
+                            <input class="us-number" id="us-number-textbox-test2" name="us-number" type="text" maxlength="7" onkeydown="return ( event.ctrlKey || event.altKey 
+                            || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false) 
+                            || (95<event.keyCode && event.keyCode<106)
+                            || (event.keyCode==8) || (event.keyCode==9) 
+                            || (event.keyCode>34 && event.keyCode<40) 
+                            || (event.keyCode==46) )" />
+                        </div>
+                        <div class="child-cell environment">
+                            <select class="select dev-select" id="dev-dropbox-test2">
+                                <option class="label-text-grey" value="select">Select DEV</option>
+                                <option value="hani">Hani</option>
+                                <option value="huyen">Huyen</option>
+                                <option value="ken">Ken</option>
+                                <option value="leslie">Leslie</option>
+                                <option value="nilar">Nilar</option>
+                                <option value="rafael">Rafael</option>
+                                <option value="ulises">Ulises</option>
+                            </select>
+                        </div>
+                        <div class="child-cell environment">
+                            <select class="select qa-select" id="qa-dropbox-test2">
+                                <option class="label-text-grey" value="select">Select QA</option>
+                                <option value="julio">Julio</option>
+                                <option value="kim">Kim</option>
+                                <option value="sarika">Sarika</option>
+                                <option value="stephanie">Stephanie</option>
+                                <option value="tony">Tony</option>
+                            </select>
+                        </div>
+
+                        <div class="child-cell cell-reserve">
+                            <input class="btn-output" id="r2-btn-reserve" type="submit" value="RESERVE" />
+                        </div>
+                
+                        <div class="break"></div>
+
+                        <div class="child-cell numbering">
+                            <span class="num-label">&nbsp;03</span>
+                        </div>
+                        <div class="child-cell status">
+                            <!-- <select class="select status-select" id="status-dropbox-test1">
+                                <option class="label-text-grey" value="select">Select Status</option>
+                                <option value="unavailable">Unavailable</option>
+                            </select> -->
+                            <label class="label-text-grey" id="status-dropbox-test3">unavailable</label>
+                        </div>
+                        <div class="child-cell environment">
+                            <label class="env-label" for="env-test3">TEST3</label> 
+                        </div>
+                        <div class="child-cell userstory">
+                            <label class="us-label" for="us-number">US</label> 
+                            <input class="us-number" id="us-number-textbox-test3" name="us-number" type="text" maxlength="7" onkeydown="return ( event.ctrlKey || event.altKey 
+                            || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false) 
+                            || (95<event.keyCode && event.keyCode<106)
+                            || (event.keyCode==8) || (event.keyCode==9) 
+                            || (event.keyCode>34 && event.keyCode<40) 
+                            || (event.keyCode==46) )" />
+                        </div>
+                        <div class="child-cell environment">
+                                <select class="select dev-select" id="dev-dropbox-test3">
+                                <option class="label-text-grey" value="select">Select DEV</option>
+                                <option value="hani">Hani</option>
+                                <option value="huyen">Huyen</option>
+                                <option value="ken">Ken</option>
+                                <option value="leslie">Leslie</option>
+                                <option value="nilar">Nilar</option>
+                                <option value="rafael">Rafael</option>
+                                <option value="ulises">Ulises</option>
+                            </select>
+                        </div>
+                        <div class="child-cell environment">
+                            <select class="select qa-select" id="qa-dropbox-test3">
+                                <option class="label-text-grey" value="select">Select QA</option>
+                                <option value="julio">Julio</option>
+                                <option value="kim">Kim</option>
+                                <option value="sarika">Sarika</option>
+                                <option value="stephanie">Stephanie</option>
+                                <option value="tony">Tony</option>
+                            </select>
+                        </div>
+
+                        <div class="child-cell cell-reserve">
+                            <input class="btn-output" id="r3-btn-reserve" type="submit" value="RESERVE" />
+                        </div>
+                
+                        <div class="break"></div>
+
+                        <div class="child-cell numbering">
+                            <span class="num-label">&nbsp;04</span>
+                        </div>
+                        <div class="child-cell status">
+                            <!-- <select class="select status-select" id="status-dropbox-test1">
+                                <option class="label-text-grey" value="select">Select Status</option>
+                                <option value="unavailable">Unavailable</option>
+                            </select> -->
+                            <label class="label-text-grey" id="status-dropbox-test4">unavailable</label>
+                        </div>
+                        <div class="child-cell environment">
+                            <label class="env-label" for="env-test4">TEST4</label> 
+                        </div>
+                        <div class="child-cell userstory">
+                            <label class="us-label" for="us-number">US</label> 
+                            <input class="us-number" id="us-number-textbox-test4" name="us-number" type="text" maxlength="7" onkeydown="return ( event.ctrlKey || event.altKey 
+                            || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false) 
+                            || (95<event.keyCode && event.keyCode<106)
+                            || (event.keyCode==8) || (event.keyCode==9) 
+                            || (event.keyCode>34 && event.keyCode<40) 
+                            || (event.keyCode==46) )" />
+                        </div>
+                        <div class="child-cell environment">
+                            <select class="select dev-select" id="dev-dropbox-test4">
+                                <option class="label-text-grey" value="select">Select DEV</option>
+                                <option value="hani">Hani</option>
+                                <option value="huyen">Huyen</option>
+                                <option value="ken">Ken</option>
+                                <option value="leslie">Leslie</option>
+                                <option value="nilar">Nilar</option>
+                                <option value="rafael">Rafael</option>
+                                <option value="ulises">Ulises</option>
+                            </select>
+                        </div>
+                        <div class="child-cell environment">
+                            <select class="select qa-select" id="qa-dropbox-test4">
+                                <option class="label-text-grey" value="select">Select QA</option>
+                                <option value="julio">Julio</option>
+                                <option value="kim">Kim</option>
+                                <option value="sarika">Sarika</option>
+                                <option value="stephanie">Stephanie</option>
+                                <option value="tony">Tony</option>
+                            </select>
+                        </div>
+
+                        <div class="child-cell cell-reserve">
+                            <input class="btn-output" id="r4-btn-reserve" type="submit" value="RESERVE" />
+                        </div>
+                    </fieldset>
+                </form>
             </div>
-        </div>
-        <div class="child-cell-output developer r1-developer">
-            <div class="cell row1-cell3" id="row1-dev">
-                <!-- Dynamic Content -->
-                <span id="r1dv-f"></span>
+        <!-- END MAIN FRAME -->
+        </div><!-- DIV ID MAIN FRAME -->
+
+        <!-- //////////////////////////////////////////////////////////////////////////// -->
+        <!-- TOP OUTPUT TABLE -->
+        <!-- //////////////////////////////////////////////////////////////////////////// -->
+        <div class="main-frame-output" id="main-frame">
+            <div class="child-cell-output numbering r1-numbering">
+                <span class="num-label num-label-output">&nbsp;01</span>
             </div>
-        </div>
-        <div class="child-cell-output qa r1-qa">
-            <div class="cell row1-cell4" id="row1-qa">
-                <!-- Dynamic Content -->
-                <span id="r1qa-f"></span>
+            <div class="child-cell-output status r1-status">
+                <div class="cell row1-cell1" id="row1-status">
+                    <!-- Dynamic Content -->
+                    <span id="r1st-f"></span>
+                </div>
             </div>
-        </div>
-        <div class="child-cell-output">
-            <div class="cell row1-cell5">
-                <input class="btn-output r1-button-available" id="r1-btn-available" type="submit" value="FREE UP" />
+            <div class="child-cell-output environment r1-environment">
+                <label class="env-label env-label-output" id="row1-env" for="env-test1">TEST1</label> 
             </div>
+            <div class="child-cell-output userstory r1-userstory">
+                <div class="cell row1-cell2" id="row1-userstory">
+                    <!-- Dynamic Content -->
+                    <span id="r1us-f"></span>
+                </div>
+            </div>
+            <div class="child-cell-output developer r1-developer">
+                <div class="cell row1-cell3" id="row1-dev">
+                    <!-- Dynamic Content -->
+                    <span id="r1dv-f"></span>
+                </div>
+            </div>
+            <div class="child-cell-output qa r1-qa">
+                <div class="cell row1-cell4" id="row1-qa">
+                    <!-- Dynamic Content -->
+                    <span id="r1qa-f"></span>
+                </div>
+            </div>
+            <div class="child-cell-output">
+                <div class="cell row1-cell5">
+                    <input class="btn-output r1-button-available" id="r1-btn-available" type="submit" value="UNRESERVE" />
+                </div>
+            </div>
+
+            <div class="break"></div>
+
+            <div class="child-cell-output numbering r2-numbering">
+                <span class="num-label num-label-output">&nbsp;02</span>
+            </div>
+            <div class="child-cell-output status r2-status">
+                <div class="cell row2-cell1" id="row2-status">
+                    <!-- Dynamic Content -->
+                    <span id="r2st-f"></span>
+                </div>
+            </div>
+            <div class="child-cell-output environment r2-environment">
+                <label class="env-label env-label-output" id="row2-env" for="env-test2">TEST2</label> 
+            </div>
+            <div class="child-cell-output userstory r2-userstory">
+                <div class="cell row2-cell2" id="row2-userstory">
+                    <!-- Dynamic Content -->
+                    <span id="r2us-f"></span>
+                </div>
+            </div>
+            <div class="child-cell-output developer r2-developer">
+                <div class="cell row2-cell3" id="row2-dev">
+                    <!-- Dynamic Content -->
+                    <span id="r2dv-f"></span>
+                </div>
+            </div>
+            <div class="child-cell-output qa r2-qa">
+                <div class="cell row2-cell4" id="row2-qa">
+                    <!-- Dynamic Content -->
+                    <span id="r2qa-f"></span>
+                </div>
+            </div>
+            <div class="child-cell-output">
+                <div class="cell row2-cell5">
+                    <input class="btn-output r2-button-available" id="r2-btn-available" type="submit" value="UNRESERVE" />
+                </div>
+            </div>
+
+            <div class="break"></div>
+
+            <div class="child-cell-output numbering r3-numbering">
+                <span class="num-label num-label-output">&nbsp;03</span>
+            </div>
+            <div class="child-cell-output status r3-status">
+                <div class="cell row3-cell1" id="row3-status">
+                    <!-- Dynamic Content -->
+                    <span id="r3st-f"></span>
+                </div>
+            </div>
+            <div class="child-cell-output environment r3-environment">
+                <label class="env-label env-label-output" id="row3-env" for="env-test3">TEST3</label> 
+            </div>
+            <div class="child-cell-output userstory r3-userstory">
+                <div class="cell row3-cell2" id="row3-userstory">
+                    <!-- Dynamic Content -->
+                    <span id="r3us-f"></span>
+                </div>
+            </div>
+            <div class="child-cell-output developer r3-developer">
+                <div class="cell row3-cell3" id="row3-dev">
+                    <!-- Dynamic Content -->
+                    <span id="r3dv-f"></span>
+                </div>
+            </div>
+            <div class="child-cell-output qa r3-qa">
+                <div class="cell row3-cell4" id="row3-qa">
+                    <!-- Dynamic Content -->
+                    <span id="r3qa-f"></span>
+                </div>
+            </div>
+            <div class="child-cell-output">
+                <div class="cell row3-cell5">
+                    <input class="btn-output r3-button-available" id="r3-btn-available" type="submit" value="UNRESERVE" />
+                </div>
+            </div>
+
+            <div class="break"></div>
+
+            <div class="child-cell-output numbering r4-numbering">
+                <span class="num-label num-label-output">&nbsp;04</span>
+            </div>
+            <div class="child-cell-output status r4-status">
+                <div class="cell row4-cell1" id="row4-status">
+                    <!-- Dynamic Content -->
+                    <span id="r4st-f"></span>
+                </div>
+            </div>
+            <div class="child-cell-output environment r4-environment">
+                <label class="env-label env-label-output" id="row4-env" for="env-test4">TEST4</label> 
+            </div>
+            <div class="child-cell-output userstory r4-userstory">
+                <div class="cell row4-cell2" id="row4-userstory">
+                    <!-- Dynamic Content -->
+                    <span id="r4us-f"></span>
+                </div>
+            </div>
+            <div class="child-cell-output developer r4-developer">
+                <div class="cell row4-cell3" id="row4-dev">
+                    <!-- Dynamic Content -->
+                    <span id="r4dv-f"></span>
+                </div>
+            </div>
+            <div class="child-cell-output qa r4-qa">
+                <div class="cell row4-cell4" id="row4-qa">
+                    <!-- Dynamic Content -->
+                    <span id="r4qa-f"></span>
+                </div>
+            </div>
+            <div class="child-cell-output">
+                <div class="cell row4-cell5">
+                    <input class="btn-output r4-button-available" id="r4-btn-available" type="submit" value="UNRESERVE" />
+                </div>
+            </div>
+
+            <div class="break"></div>
+
+            <div class="box-btn-refresh">
+                <input class="btn-refresh" id="btn-refresh" type="submit" value="REFRESH" />
+            </div>
+
+        </div>
+        <!-- //////////////////////////////////////////////////////////////////////////// -->
+        <!-- END OUTPUT TABLE -->
+        <!-- //////////////////////////////////////////////////////////////////////////// -->
+        <div class="line"><img class="line-img-output line-img-output-log" src="images/line.png" alt=""></div>
+
+        <div class="title-log">
+            <span>RESERVATION ACTIVITY LOG</span>
         </div>
 
         <div class="break"></div>
 
-        <div class="child-cell-output numbering r2-numbering">
-            <span class="num-label num-label-output">&nbsp;02</span>
-        </div>
-        <div class="child-cell-output status r2-status">
-            <div class="cell row2-cell1" id="row2-status">
-                <!-- Dynamic Content -->
-                <span id="r2st-f"></span>
+        <div class="log-parent-box">
+            <div class="log-output-box">
+                <div class="log-output" id="log-output1"></div>
+                <div class="log-output" id="log-output2"></div>
+                <div class="log-output" id="log-output3"></div>
+                <div class="log-output" id="log-output4"></div>
             </div>
         </div>
-        <div class="child-cell-output environment r2-environment">
-            <label class="env-label env-label-output" id="row2-env" for="env-test">TEST</label> 
-        </div>
-        <div class="child-cell-output userstory r2-userstory">
-            <div class="cell row2-cell2" id="row2-userstory">
-                <!-- Dynamic Content -->
-                <span id="r2us-f"></span>
-            </div>
-        </div>
-        <div class="child-cell-output developer r2-developer">
-            <div class="cell row2-cell3" id="row2-dev">
-                <!-- Dynamic Content -->
-                <span id="r2dv-f"></span>
-            </div>
-        </div>
-        <div class="child-cell-output qa r2-qa">
-            <div class="cell row2-cell4" id="row2-qa">
-                <!-- Dynamic Content -->
-                <span id="r2qa-f"></span>
-            </div>
-        </div>
-        <div class="child-cell-output">
-            <div class="cell row2-cell5">
-                <input class="btn-output r2-button-available" id="r2-btn-available" type="submit" value="FREE UP" />
-            </div>
-        </div>
-
-        <div class="break"></div>
-
-        <div class="child-cell-output numbering r3-numbering">
-            <span class="num-label num-label-output">&nbsp;03</span>
-        </div>
-        <div class="child-cell-output status r3-status">
-            <div class="cell row3-cell1" id="row3-status">
-                <!-- Dynamic Content -->
-                <span id="r3st-f"></span>
-            </div>
-        </div>
-        <div class="child-cell-output environment r3-environment">
-            <label class="env-label env-label-output" id="row3-env" for="env-test1">TEST1</label> 
-        </div>
-        <div class="child-cell-output userstory r3-userstory">
-            <div class="cell row3-cell2" id="row3-userstory">
-                <!-- Dynamic Content -->
-                <span id="r3us-f"></span>
-            </div>
-        </div>
-        <div class="child-cell-output developer r3-developer">
-            <div class="cell row3-cell3" id="row3-dev">
-                <!-- Dynamic Content -->
-                <span id="r3dv-f"></span>
-            </div>
-        </div>
-        <div class="child-cell-output qa r3-qa">
-            <div class="cell row3-cell4" id="row3-qa">
-                <!-- Dynamic Content -->
-                <span id="r3qa-f"></span>
-            </div>
-        </div>
-        <div class="child-cell-output">
-            <div class="cell row3-cell5">
-                <input class="btn-output r3-button-available" id="r3-btn-available" type="submit" value="FREE UP" />
-            </div>
-        </div>
-
-        <div class="break"></div>
-
-        <div class="child-cell-output numbering r4-numbering">
-            <span class="num-label num-label-output">&nbsp;04</span>
-        </div>
-        <div class="child-cell-output status r4-status">
-            <div class="cell row4-cell1" id="row4-status">
-                <!-- Dynamic Content -->
-                <span id="r4st-f"></span>
-            </div>
-        </div>
-        <div class="child-cell-output environment r4-environment">
-            <label class="env-label env-label-output" id="row4-env" for="env-test2">TEST2</label> 
-        </div>
-        <div class="child-cell-output userstory r4-userstory">
-            <div class="cell row4-cell2" id="row4-userstory">
-                <!-- Dynamic Content -->
-                <span id="r4us-f"></span>
-            </div>
-        </div>
-        <div class="child-cell-output developer r4-developer">
-            <div class="cell row4-cell3" id="row4-dev">
-                <!-- Dynamic Content -->
-                <span id="r4dv-f"></span>
-            </div>
-        </div>
-        <div class="child-cell-output qa r4-qa">
-            <div class="cell row4-cell4" id="row4-qa">
-                <!-- Dynamic Content -->
-                <span id="r4qa-f"></span>
-            </div>
-        </div>
-        <div class="child-cell-output">
-            <div class="cell row4-cell5">
-                <input class="btn-output r4-button-available" id="r4-btn-available" type="submit" value="FREE UP" />
-            </div>
-        </div>
-
-        <div class="break"></div>
-
-        <div class="child-cell-output numbering r5-numbering">
-            <span class="num-label num-label-output">&nbsp;05</span>
-        </div>
-        <div class="child-cell-output status r5-status">
-            <div class="cell row5-cell1" id="row5-status">
-                <!-- Dynamic Content -->
-                <span id="r5st-f"></span>
-            </div>
-        </div>
-        <div class="child-cell-output environment r5-environment">
-            <label class="env-label env-label-output" id="row5-env" for="env-test3">TEST3</label> 
-        </div>
-        <div class="child-cell-output userstory r5-userstory">
-            <div class="cell row5-cell2" id="row5-userstory">
-                <!-- Dynamic Content -->
-                <span id="r5us-f"></span>
-            </div>
-        </div>
-        <div class="child-cell-output developer r5-developer">
-            <div class="cell row5-cell3" id="row5-dev">
-                <!-- Dynamic Content -->
-                <span id="r5dv-f"></span>
-            </div>
-        </div>
-        <div class="child-cell-output qa r5-qa">
-            <div class="cell row5-cell4" id="row5-qa">
-                <!-- Dynamic Content -->
-                <span id="r5qa-f"></span>
-            </div>
-        </div>
-        <div class="child-cell-output">
-            <div class="cell row5-cell5">
-                <input class="btn-output r5-button-available" id="r5-btn-available" type="submit" value="FREE UP" />
-            </div>
-        </div>
-
-        <div class="break"></div>
-
-        <div class="child-cell-output numbering r6-numbering">
-            <span class="num-label num-label-output">&nbsp;06</span>
-        </div>
-        <div class="child-cell-output status r6-status">
-            <div class="cell row6-cell1" id="row6-status">
-                <!-- Dynamic Content -->
-                <span id="r6st-f"></span>
-            </div>
-        </div>
-        <div class="child-cell-output environment r6-environment">
-            <label class="env-label env-label-output" id="row6-env" for="env-test4">TEST4</label> 
-        </div>
-        <div class="child-cell-output userstory r6-userstory">
-            <div class="cell row6-cell2" id="row6-userstory">
-                <!-- Dynamic Content -->
-                <span id="r6us-f"></span>
-            </div>
-        </div>
-        <div class="child-cell-output developer r6-developer">
-            <div class="cell row6-cell3" id="row6-dev">
-                <!-- Dynamic Content -->
-                <span id="r6dv-f"></span>
-            </div>
-        </div>
-        <div class="child-cell-output qa r6-qa">
-            <div class="cell row6-cell4" id="row6-qa">
-                <!-- Dynamic Content -->
-                <span id="r6qa-f"></span>
-            </div>
-        </div>
-        <div class="child-cell-output">
-            <div class="cell row6-cell5">
-                <input class="btn-output r6-button-available" id="r6-btn-available" type="submit" value="FREE UP" />
-            </div>
-        </div>
-
-        <div class="break"></div>
-
-        <div class="box-btn-refresh">
-            <input class="btn-refresh" id="btn-refresh" type="submit" value="REFRESH" />
-        </div>
-
-    </div>
-    <!-- //////////////////////////////////////////////////////////////////////////// -->
-    <!-- END OUTPUT TABLE -->
-    <!-- //////////////////////////////////////////////////////////////////////////// -->
-    <div class="break"></div>
-    <div class="line"><img class="line-img-output line-img-output-log" src="images/line.png" alt=""></div>
-    <div class="break"></div>
-    <div class="title-log">
-        <span>RESERVATION ACTIVITY LOG</span>
-    </div>
-
-    <div class="break"></div>
-
-    <div class="log-output-box">
-        <div class="log-output" id="log-output1"></div>
-        <div class="log-output" id="log-output2"></div>
-        <div class="log-output" id="log-output3"></div>
-        <div class="log-output" id="log-output4"></div>
-        <div class="log-output" id="log-output5"></div>
-        <div class="log-output" id="log-output6"></div>
-    </div>
     
-
-    
+    </div>
+    <!-- //////////////////////////////////////////////////////////////////////////// -->
+    <!-- END CANVAS BOX -->
+    <!-- //////////////////////////////////////////////////////////////////////////// -->
+    <div class="warning">
+        <span>* Fields under columns with red-colored text headers are required to reserve environment.</span>
+    </div>
     <script type="text/javascript" src="javascripts/store.js"></script>
     <script type="text/javascript" src="javascripts/app.js"></script>
 </body>

@@ -1,8 +1,6 @@
 [{
-"log1": "01 | DEV : Env AVAILABLE    .",
-"log2": "02 | TEST : Env AVAILABLE    .",
-"log3": "03 | TEST1 : Env AVAILABLE    .",
-"log4": "04 | TEST2 : Env AVAILABLE    .",
-"log5": "05 | TEST3 : Env AVAILABLE    .",
-"log6": "06 | TEST4 : Env AVAILABLE    ."
+"log1": "01 | TEST 1 : Env AVAILABLE    .",
+"log2": "02 | TEST 2 : Env AVAILABLE    .",
+"log3": "03 | TEST 3 : Env AVAILABLE    .",
+"log4": "04 | TEST 4 : Env AVAILABLE    ."
 }]
