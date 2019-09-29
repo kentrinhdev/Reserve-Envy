@@ -3,49 +3,74 @@
     box-sizing: border-box;
 }
 
-/* html {
-    background: url(/images/env.jpg) no-repeat center top fixed; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-} */
-
-#main-frame {
-    width: 55.5vw;
-    min-width: 1350px;
+.canvas-box {
     text-align: center;
 }
 
+.main-frame {
+    margin-left: -10vw;
+}
+
 .table-head {
-    padding-bottom: 10px;
+    margin-right: 15px;
     margin-bottom: -50px;
+    padding-left: 7.5vw;
+    padding-bottom: 10px;
+}
+
+.header-required {
+    color: red;
 }
 
 .line-img {
-    width: 1350px;
+    width: 1620px;
     height: 15px;
+    margin-left: 7.5vw;
     margin-bottom: -20px;
+}
+
+.child-cell {
+    line-height: 30px;
+    vertical-align: middle;
+    display: inline-block;
 }
 
 .cell, .child-cell, .child-cell-output {
     font-size: 1.5rem;
     display: inline-block;
-
     margin-left: -2px;
     margin-right: -2px;
 }
 
 .numbering {
-    width: 70px;
-}
-
-.num-label, .env-label, .us-label {
-    font-size: 1.3rem;
+    width: 80px;
+    padding-right: 5px;
 }
 
 .status {
     width: 170px;
+}
+
+.quality {
+    width: 200px;
+}
+
+.title {
+    text-align: center;
+}
+
+.title > label {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 14.5px;
+    color: steelblue;
+    display: inline-block;
+    vertical-align: middle;
+    border-top: 1px dashed red;
+    border-bottom: 1px dashed red;
+}
+
+.num-label, .env-label, .us-label {
+    font-size: 1.3rem;
 }
 
 .select {
@@ -76,20 +101,23 @@
     border-bottom: 1px solid lightblue;
 }
 
+.form-box {
+    padding: 0px !important;
+}
+
 .reservation-form, .reservation-fieldset {
     border: none;
 }
 
 .box-btn-update {
     margin-top: 25px;
-    padding-left: 45vw;
 }
 
 .btn-refresh {
-    top: 615px;
-    left: 1040px;
-    width: 150px;
+    top: 395px;
+    width: 1175px;
     font-size: 16px;
+    margin-left: -529px;
     padding: 16px 30px;
     color: black;
     text-align: center;
@@ -102,7 +130,6 @@
 
 .btn {
     top: 280px;
-    left: 1040px;
     width: 150px;
     font-size: 16px;
     padding: 16px 30px;
@@ -121,12 +148,15 @@
   }
 
 .line-img-output {
-    width: 1350px;
+    width: 1550px;
     height: 15px;
+    margin-left: -75px !important;
     margin-bottom: -30px;
 }
 
 .main-frame-output {
+    width: 100%;
+    margin-left: -5vw;
     margin-top: 20px;
     padding-top: 10px;
 }
@@ -140,8 +170,12 @@
     display: block;
 }
 
+.cell-reserve {
+    padding-top: 22px;
+}
+
 .btn-output {
-    width: 90px;
+    width: 110px;
     height: 30px;
     font-size: 16px;
     margin-top: -25px;
@@ -160,25 +194,43 @@
 }
 
 .title-log {
+    width: 1175px;
     font-size: 1.4rem;
     color: lightskyblue;
     text-align: left;
     margin-top: 30px;
-    padding-left: 150px;
+    margin-left: 17vw;
+}
+
+.warning {
+    width: 1175px;
+    font-size: 12px !important;
+    font-style: italic !important;
+    color: red !important;
+    text-align: left;
+    margin-top: 15px !important;
+    margin-left: 17vw;
+}
+
+.log-parent-box {
+    text-align: center !important;
+    margin-left: 17vw;
 }
 
 .log-output-box {
-    width: 55.5vw;
-    min-width: 1150px;
+    width: 1175px;
+    min-width: 1000px;
     height: 165px;
+    text-align: left !important;
     color: lawngreen;
     background: black !important;
-    margin-left: 150px;
     margin-top: 15px;
     padding-left: 25px;
     padding-top: 15px;
     padding-bottom: 10px;
     border-radius: 5px;
+
+    border: 1px dashed lawngreen;
 }
 
 .log-output {
